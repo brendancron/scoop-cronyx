@@ -1,0 +1,23 @@
+{
+    "version": "0.1.0",
+    "description": "Cronyx programming language compiler/interpreter",
+    "homepage": "https://github.com/brendancron/CronyxLang",
+    "license": "MIT",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/brendancron/CronyxLang/releases/download/v0.1.0/cronyx-v0.1.0-x86_64-pc-windows-msvc.zip",
+            "hash": "6e16e4dcf58c2a0709c78300cefa51077b6849fce6db0934231b25cd92bbee51",
+            "bin": "cronyx.exe"
+        }
+    },
+    "checkver": {
+        "github": "https://github.com/brendancron/CronyxLang"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/brendancron/CronyxLang/releases/download/v$version/cronyx-v$version-x86_64-pc-windows-msvc.zip"
+            }
+        }
+    }
+}
