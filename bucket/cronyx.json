@@ -6,7 +6,7 @@
     "architecture": {
         "64bit": {
             "url": "https://github.com/brendancron/CronyxLang/releases/download/v0.1.3/cronyx-v0.1.3-x86_64-pc-windows-msvc.zip",
-            "hash": "7fa054e00af087d7d650d8ef3895a6213493f1fdf78a61fe7b178bb1da04ea5b",
+            "hash": "ec6bfc9cdf08c2f37ad146ab43abdb8c0b1539c30ee6245ebae084db11fe5134",
             "bin": "cronyx.exe"
         }
     },
