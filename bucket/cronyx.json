@@ -6,7 +6,7 @@
     "architecture": {
         "64bit": {
             "url": "https://github.com/brendancron/CronyxCli/releases/download/v0.0.1/cronyx-v0.0.1-windows-x86_64.zip",
-            "hash": "b8894a620b71f170a0528379b31515b2272146c5745ec41011ecdaeb27bdced2",
+            "hash": "2d53e9ad3b6d650c415692c5467ff31d045cb7cf84fc798b93ff729bdaf64d60",
             "bin": "cronyx.exe"
         }
     },
