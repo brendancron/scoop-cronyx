@@ -1,22 +1,22 @@
 {
-    "version": "0.1.4",
-    "description": "Cronyx programming language compiler/interpreter",
-    "homepage": "https://github.com/brendancron/CronyxLang",
+    "version": "0.0.1",
+    "description": "Cronyx language CLI and toolchain manager",
+    "homepage": "https://github.com/brendancron/CronyxCli",
     "license": "MIT",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/brendancron/CronyxLang/releases/download/v0.1.4/cronyx-v0.1.4-x86_64-pc-windows-msvc.zip",
-            "hash": "ab4778c6acfda3ebc83bc800d83f159d31e25b9799fc809e4e87bc5ff5843681",
+            "url": "https://github.com/brendancron/CronyxCli/releases/download/v0.0.1/cronyx-v0.0.1-windows-x86_64.zip",
+            "hash": "b8894a620b71f170a0528379b31515b2272146c5745ec41011ecdaeb27bdced2",
             "bin": "cronyx.exe"
         }
     },
     "checkver": {
-        "github": "https://github.com/brendancron/CronyxLang"
+        "github": "https://github.com/brendancron/CronyxCli"
     },
     "autoupdate": {
         "architecture": {
             "64bit": {
-                "url": "https://github.com/brendancron/CronyxLang/releases/download/v$version/cronyx-v$version-x86_64-pc-windows-msvc.zip"
+                "url": "https://github.com/brendancron/CronyxCli/releases/download/v$version/cronyx-v$version-windows-x86_64.zip"
             }
         }
     }
