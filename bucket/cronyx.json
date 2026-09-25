@@ -1,12 +1,12 @@
 {
-    "version": "0.0.1",
+    "version": "0.0.14",
     "description": "Cronyx language CLI and toolchain manager",
     "homepage": "https://github.com/brendancron/CronyxCli",
     "license": "MIT",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/brendancron/CronyxCli/releases/download/v0.0.1/cronyx-v0.0.1-windows-x86_64.zip",
-            "hash": "f3426df63d6fa71fbcd0a01506e82a9a8651e3deeabda2c497f0dd66951631c2",
+            "url": "https://github.com/brendancron/CronyxLang/releases/download/v0.0.14/cronyx-v0.0.14-x86_64-pc-windows-gnu.zip",
+            "hash": "9d7c8e6e4a36614d9a9800a5f8fd12eaa128aa38addee1d8571c93c562e9aaaa",
             "bin": "cronyx.exe"
         }
     },
@@ -19,5 +19,6 @@
                 "url": "https://github.com/brendancron/CronyxCli/releases/download/v$version/cronyx-v$version-windows-x86_64.zip"
             }
         }
-    }
+    },
+    "extract_dir": "cronyx-v0.0.14-x86_64-pc-windows-gnu"
 }
