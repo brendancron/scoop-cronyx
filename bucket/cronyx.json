@@ -1,24 +1,49 @@
 {
+    "##": [
+        "One complete toolchain: `cx`, the compiler it links, and the standard",
+        "library it resolves `import \"std/\u2026\"` against. `cx` looks for that library",
+        "at ..\\lib\\cronyx\\stdlib relative to its own binary, and Scoop puts a",
+        "generated shim on the PATH rather than a link -- a shim is a different",
+        "executable and reports itself, so that search would start in the shims",
+        "directory and find nothing. Hence CRONYX_STDLIB, the override cx checks",
+        "first.",
+        "",
+        "`cronyxc` is the bare compiler driver and is deliberately not on the PATH,",
+        "which is the choice the Homebrew formula makes with it too.",
+        "",
+        "version, url, hash and extract_dir are maintained by",
+        ".github/workflows/update.yml."
+    ],
     "version": "0.0.14",
-    "description": "Cronyx language CLI and toolchain manager",
-    "homepage": "https://github.com/brendancron/CronyxCli",
+    "description": "The Cronyx toolchain: the cx package manager and the compiler it links",
+    "homepage": "https://github.com/brendancron/CronyxLang",
     "license": "MIT",
     "architecture": {
         "64bit": {
             "url": "https://github.com/brendancron/CronyxLang/releases/download/v0.0.14/cronyx-v0.0.14-x86_64-pc-windows-gnu.zip",
-            "hash": "9d7c8e6e4a36614d9a9800a5f8fd12eaa128aa38addee1d8571c93c562e9aaaa",
-            "bin": "cronyx.exe"
+            "hash": "9d7c8e6e4a36614d9a9800a5f8fd12eaa128aa38addee1d8571c93c562e9aaaa"
         }
     },
+    "extract_dir": "cronyx-v0.0.14-x86_64-pc-windows-gnu",
+    "bin": [
+        "bin\\cx.exe"
+    ],
+    "env_set": {
+        "CRONYX_STDLIB": "$dir\\lib\\cronyx\\stdlib"
+    },
     "checkver": {
-        "github": "https://github.com/brendancron/CronyxCli"
+        "github": "https://github.com/brendancron/CronyxLang",
+        "regex": "releases/tag/v([\\d.]+)"
     },
     "autoupdate": {
         "architecture": {
             "64bit": {
-                "url": "https://github.com/brendancron/CronyxCli/releases/download/v$version/cronyx-v$version-windows-x86_64.zip"
+                "url": "https://github.com/brendancron/CronyxLang/releases/download/v$version/cronyx-v$version-x86_64-pc-windows-gnu.zip"
             }
+        },
+        "extract_dir": "cronyx-v$version-x86_64-pc-windows-gnu",
+        "hash": {
+            "url": "$url.sha256"
         }
-    },
-    "extract_dir": "cronyx-v0.0.14-x86_64-pc-windows-gnu"
+    }
 }
