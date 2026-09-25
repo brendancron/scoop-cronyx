@@ -1,0 +1,92 @@
+name: Update the manifest
+
+# Scoop's `checkver` and `autoupdate` are declarations, not behaviour: nothing
+# reads them unless something runs the update. That something is this. Without
+# it the manifest names whatever release it was last edited for, which is how it
+# came to sit on a version of a project that no longer exists.
+on:
+  schedule:
+    # Releases are cut by hand and rarely, so once a day is plenty.
+    - cron: '17 6 * * *'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Release tag to point at, e.g. v0.0.14. The latest if empty.'
+        required: false
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Point the manifest at the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          WANTED: ${{ github.event.inputs.tag }}
+        run: |
+          repo=brendancron/CronyxLang
+          manifest=bucket/cronyx.json
+
+          if [ -n "$WANTED" ]; then
+            tag=$WANTED
+          else
+            tag=$(gh release view -R "$repo" --json tagName -q .tagName)
+          fi
+          case "$tag" in
+            v[0-9]*) ;;
+            *) echo "::error::'$tag' is not a toolchain tag"; exit 1 ;;
+          esac
+          version=${tag#v}
+
+          archive="cronyx-$tag-x86_64-pc-windows-gnu.zip"
+
+          # A release that carries no Windows archive leaves the manifest where
+          # it is. That is the normal state while a release is still building,
+          # and it is not a failure.
+          if ! gh release download "$tag" -R "$repo" \
+               -p "$archive" -p "$archive.sha256" -D dl 2>/dev/null; then
+            echo "$tag carries no Windows archive; leaving the manifest alone."
+            exit 0
+          fi
+
+          # The checksum comes from the archive rather than from the sidecar
+          # alone, so a sidecar that disagrees with what it describes is an
+          # error here and not something a user discovers on install.
+          published=$(cat "dl/$archive.sha256")
+          actual=$(sha256sum "dl/$archive" | awk '{print $1}')
+          [ "$published" = "$actual" ] || {
+            echo "::error::$archive hashes to $actual, but its .sha256 says $published"
+            exit 1
+          }
+
+          python3 - "$manifest" "$version" "$tag" "$archive" "$actual" <<'PY'
+          import json, sys
+
+          path, version, tag, archive, sha = sys.argv[1:6]
+          with open(path) as f:
+              m = json.load(f)
+
+          base = f"https://github.com/brendancron/CronyxLang/releases/download/{tag}"
+          m["version"] = version
+          m["architecture"]["64bit"]["url"] = f"{base}/{archive}"
+          m["architecture"]["64bit"]["hash"] = sha
+          m["extract_dir"] = archive[: -len(".zip")]
+
+          with open(path, "w") as f:
+              json.dump(m, f, indent=4)
+              f.write("\n")
+          PY
+
+          echo "pointed at $version"
+
+      - name: Push it
+        run: |
+          git diff --quiet && { echo "The manifest already names it."; exit 0; }
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git commit -am "cronyx $(python3 -c 'import json;print(json.load(open("bucket/cronyx.json"))["version"])')"
+          git push
