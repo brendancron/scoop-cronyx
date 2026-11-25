@@ -14,17 +14,17 @@
         "version, url, hash and extract_dir are maintained by",
         ".github/workflows/update.yml."
     ],
-    "version": "0.0.29",
+    "version": "0.0.30",
     "description": "The Cronyx toolchain: the cx package manager and the compiler it links",
     "homepage": "https://github.com/brendancron/CronyxLang",
     "license": "MIT",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/brendancron/CronyxLang/releases/download/v0.0.29/cronyx-v0.0.29-x86_64-pc-windows-gnu.zip",
-            "hash": "0794a966c5cc62da589b52898747d4175ea892c950131686bfcf75b7471df864"
+            "url": "https://github.com/brendancron/CronyxLang/releases/download/v0.0.30/cronyx-v0.0.30-x86_64-pc-windows-gnu.zip",
+            "hash": "9a209cc79f7386fff797bc36edac93da96f830f758b8021d4b7a93e19e878afc"
         }
     },
-    "extract_dir": "cronyx-v0.0.29-x86_64-pc-windows-gnu",
+    "extract_dir": "cronyx-v0.0.30-x86_64-pc-windows-gnu",
     "bin": [
         "bin\\cx.exe"
     ],
